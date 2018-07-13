@@ -47,8 +47,6 @@ class Gift(models.Model):
         text = models.TextField()
         created_date = models.DateTimeField(
                 default=timezone.now)
-        published_date = models.DateTimeField(
-                blank=True, null=True)
         gift_status_choices = models.CharField(max_length=2,choices=STATUS_CHOICES, default=NOT_SPECIED)
 
         def publish(self):

@@ -75,7 +75,6 @@ class Event(models.Model):
 class EventSerializer(serializers.ModelSerializer):
         class Meta:
             model = Event
-<<<<<<< HEAD
             fields = ('id','headline')
 
 class Gift(models.Model):
@@ -105,9 +104,7 @@ class GiftSerializer(serializers.ModelSerializer):
         class Meta:
             model = Gift
             fields = ('id','title','text','created_date','published_date','gift_status_choices')           
-=======
             fields = ('id','headline','event_date')
->>>>>>> 91d7e0b46eb24a98c7f8a0755f1b7f5fd426007d
 
 class Social(models.Model):
     id = models.AutoField(primary_key=True)

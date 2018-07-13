@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app_giftcloud import viewsprofile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    #create
+    path('profile/', viewsprofile.ProfileView.as_view(), name='profile'),
+    #delete
+    path('profile/<int:account_id>', viewsprofile.ProfileView.as_view(), name='profile'),
+    #path('notification/', views.NotificationView.as_view(), name='notification'),
+    #path('event/', views.EventView.as_view(), name='event'),
+    
+    
+    
 ]

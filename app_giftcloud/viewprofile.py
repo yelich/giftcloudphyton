@@ -46,7 +46,7 @@ class SingleProfileView(APIView):
     #edit Profile
     def post(self, request, profile_id):
         body_unicode = request.body.decode('utf-8')
-        content = json.loads(body_unicode)
+        c = json.loads(body_unicode)
         Profile.objects.filter(id=profile_id).update(first_name=c['first_name'], 
                                                     last_name=c['last_name'],
                                                     birthdate=c['birthdate'],

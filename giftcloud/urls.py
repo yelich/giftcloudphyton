@@ -15,17 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app_giftcloud import viewsprofile
+from app_giftcloud import viewprofile, viewgift, viewcontact, viewnotification, viewevent, viewsocial
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('profile/', viewprofile.ProfileView.as_view(), name='profile'),
+    path('profile/<int:account_id>', viewprofile.ProfileView.as_view(), name='profile'),
+    path('gift/', viewgift.GiftView.as_view(), name='gift'),
+    path('gift/<int:gift_id>', viewgift.GiftView.as_view(), name='gift'),
+    path('contact/', viewcontact.ContactView.as_view(), name='contact'),
+    path('contact/<int:contact_id>', viewcontact.ContactView.as_view(), name='contact'),
+    path('notification/', viewnotification.NotificationView.as_view(), name='notification'),
+    path('notification/<int:notification_id>', viewnotification.NotificationView.as_view(), name='notification'),
+    path('event/', viewevent.EventView.as_view(), name='event'),
+    path('event/<int:event_id>', viewevent.EventView.as_view(), name='event'),
+    path('social/', viewsocial.SocialView.as_view(), name='social')
     
-    #create
-    path('profile/', viewsprofile.ProfileView.as_view(), name='profile'),
-    #delete
-    path('profile/<int:account_id>', viewsprofile.ProfileView.as_view(), name='profile'),
-    #path('notification/', views.NotificationView.as_view(), name='notification'),
-    #path('event/', views.EventView.as_view(), name='event'),
     
     
     

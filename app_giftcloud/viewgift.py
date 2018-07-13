@@ -29,7 +29,7 @@ class GiftView(APIView):
                 price=content['price'],
                 created_date=content['created_date'],
                 published_date=content['published_date'], 
-                gift_choices=content['gift_choices']),
+                gift_choices=content['gift_choices'],
                 share_choices=content['share_choices'])
         #save gift
         p.save()
@@ -49,13 +49,13 @@ class SingleGiftView(APIView):
     #edit Gift
     def post(self, request, gift_id):
         body_unicode = request.body.decode('utf-8')
-        content = json.loads(body_unicode)
+        c = json.loads(body_unicode)
         Gift.objects.filter(id=gift_id).update(store_name=c['store_name'], 
                                                     title=c['title'],
                                                     text=c['text'],
                                                     price=c['price'],
                                                     gift_choices=c['gift_choices'])
-       return Response({ "msg": "Gift updated"}, status=200)
+        return Response({ "msg": "Gift updated"}, status=200)
     #delete Gift
     def delete(self, request, gift_id):
         try:

@@ -21,10 +21,10 @@ class Gift(models.Model):
         (EMAIL, 'Email'),  
     )
     id = models.AutoField(primary_key=True)
-    store_name = models.CharField(max_length=50)
-    title = models.CharField(max_length=200)
+    store_name = models.CharField(max_length=50, default='')
+    title = models.CharField(max_length=200, default='')
     text = models.TextField()
-    price = models.CharField(max_length=50)
+    price = models.CharField(max_length=50, default='')
     created_date = models.DateTimeField(auto_now_add=True)
     published_date = models.DateTimeField(
             blank=True, null=True)
@@ -79,7 +79,7 @@ class EventSerializer(serializers.ModelSerializer):
 
 class Social(models.Model):
     id = models.AutoField(primary_key=True)
-    url = models.CharField(max_length=256)
+    url = models.CharField(max_length=256, default='')
     published_date = models.DateTimeField(
                 blank=True, null=True)
                  

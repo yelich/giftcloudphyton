@@ -43,10 +43,10 @@ class SingleEventView(APIView):
     #edit Event
     def post(self, request, event_id):
         body_unicode = request.body.decode('utf-8')
-        content = json.loads(body_unicode)
+        c = json.loads(body_unicode)
         Event.objects.filter(id=event_id).update(headline=c['headline'], 
                                                     event_date=c['event_date'])
-       return Response({ "msg": "Event updated"}, status=200)
+        return Response({ "msg": "Event updated"}, status=200)
     #delete Event
     def delete(self, request, event_id):
         try:

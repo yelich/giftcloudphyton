@@ -46,7 +46,7 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=50, default='')
     birthdate = models.DateField()
     password = models.CharField(max_length=8, default='')
-    email = models.CharField(max_length=50, default='')
+    email = models.CharField(max_length=50, default='', unique=True)
     phone = models.CharField(max_length=13, default='')
     zip_code = models.CharField(max_length=9, default='')
     gifts = models.ManyToManyField(Gift)

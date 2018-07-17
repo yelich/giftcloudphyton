@@ -20,7 +20,8 @@ from app_giftcloud import viewprofile, viewgift, viewcontact, viewnotification, 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', viewprofile.ProfileView.as_view(), name='profile'),
-    path('profile/<int:account_id>', viewprofile.ProfileView.as_view(), name='profile'),
+    path('sprofile/<int:profile_id>', viewprofile.SingleProfileView.as_view(), name='sprofile'),
+    
     path('gift/', viewgift.GiftView.as_view(), name='gift'),
     path('gift/<int:gift_id>', viewgift.GiftView.as_view(), name='gift'),
     path('contact/', viewcontact.ContactView.as_view(), name='contact'),

@@ -22,7 +22,12 @@ class ProfileView(APIView):
     def put(self, request):
         body_unicode = request.body.decode('utf-8')
         content = json.loads(body_unicode)
-        #content = body['content']
+        
+        first_name = content.get("first_name", None)
+        
+        if first_name is None:
+            return Response("first_name needed", status=400)    
+        
         p = Profile(first_name=content['first_name'], 
                     last_name=content['last_name'], 
                     birthdate=content['birthdate'], 

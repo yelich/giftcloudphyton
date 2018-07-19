@@ -12,6 +12,12 @@ class Gift(models.Model):
         (PRIVATE, 'Private'),
         (NOT_SPECIED, 'Not Specied'),  
     )
+    HIGH = 'HG'
+    LOW = 'LW'
+    PRIORITY_CHOICES = (
+        (HIGH, 'High'),
+        (LOW, 'Low'),
+    )
     FACEBOOK = 'FB'
     TWITTER = 'TW'
     EMAIL = 'EM'
@@ -22,7 +28,7 @@ class Gift(models.Model):
     )
     id = models.AutoField(primary_key=True)
     store_name = models.CharField(max_length=50, default='')
-    title = models.CharField(max_length=200, default='')
+    title = models.CharField(max_length=200, default='') #this is for description
     text = models.TextField()
     price = models.CharField(max_length=50, default='')
     created_date = models.DateTimeField(auto_now_add=True)
@@ -30,6 +36,7 @@ class Gift(models.Model):
             blank=True, null=True)
     gift_choices = models.CharField(max_length=2,choices=STATUS_CHOICES, default=NOT_SPECIED)
     share_choices = models.CharField(max_length=2,choices=SHARE_CHOICES, default=FACEBOOK)
+    priority_choices = models.CharField(max_length=2,choices=SHARE_CHOICES, default=LOW)
 
     def publish(self):
         self.published_date = timezone.now()

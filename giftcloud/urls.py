@@ -20,16 +20,20 @@ from app_giftcloud import viewprofile, viewgift, viewcontact, viewnotification, 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', viewprofile.ProfileView.as_view(), name='profile'),
-    path('sprofile/<int:profile_id>', viewprofile.SingleProfileView.as_view(), name='sprofile'),
+    path('editprofile/<int:profile_id>', viewprofile.SingleProfileView.as_view(), name='editprofile'),
     
     path('gift/', viewgift.GiftView.as_view(), name='gift'),
-    path('gift/<int:gift_id>', viewgift.GiftView.as_view(), name='gift'),
+    path('editgift/<int:gift_id>', viewgift.GiftView.as_view(), name='editgift'),
+    
     path('contact/', viewcontact.ContactView.as_view(), name='contact'),
-    path('contact/<int:contact_id>', viewcontact.ContactView.as_view(), name='contact'),
+    path('contact/<int:contact_id>', viewcontact.ContactView.as_view(), name='editcontact'),
+    
     path('notification/', viewnotification.NotificationView.as_view(), name='notification'),
-    path('notification/<int:notification_id>', viewnotification.NotificationView.as_view(), name='notification'),
+    path('editnotification/<int:notification_id>', viewnotification.NotificationView.as_view(), name='editnotification'),
+    
     path('event/', viewevent.EventView.as_view(), name='event'),
-    path('event/<int:event_id>', viewevent.EventView.as_view(), name='event'),
+    path('editevent/<int:event_id>', viewevent.EventView.as_view(), name='editevent'),
+    
     path('social/', viewsocial.SocialView.as_view(), name='social')
     
     

@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 ALLOWED_HOSTS = [
-    'phyton-giftcloud-yelic29.c9users.io',
+    '*',
     ]
 
 # Application definition
@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'c9',
-        'USER': 'yelic29',
+        'USER': 'ykhorkova',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',

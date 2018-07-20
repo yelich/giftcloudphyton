@@ -25,9 +25,12 @@ class Gift(models.Model):
         (EMAIL, 'Email'),  
     )
     id = models.AutoField(primary_key=True)
+    gift_name = models.CharField(max_length=50, default='')
+    link_url = models.CharField(max_length=500, default='')
     store_name = models.CharField(max_length=50, default='')
     title = models.CharField(max_length=200, default='') 
-    gift_description = models.TextField()
+    gift_details = models.TextField(null=True)
+    quantity = models.CharField(max_length=50, default='')
     price = models.CharField(max_length=50, default='')
     created_date = models.DateTimeField(auto_now_add=True)
     published_date = models.DateTimeField(
@@ -50,7 +53,7 @@ class Gift(models.Model):
 class GiftSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gift
-        fields = ('id','store_name','title','gift_description','created_date','published_date', 'gift_choices','share_choices')    
+        fields = ('id','gift_name','link_url','store_name','title','gift_details','quantity','price','created_date','published_date','gift_choices','share_choices')    
 
 class Profile(models.Model):
     id = models.AutoField(primary_key=True)

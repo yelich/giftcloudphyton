@@ -23,7 +23,8 @@ urlpatterns = [
     path('editprofile/<int:profile_id>', viewprofile.SingleProfileView.as_view(), name='editprofile'),
     
     path('gift/', viewgift.GiftView.as_view(), name='gift'),
-    path('editgift/<int:gift_id>', viewgift.GiftView.as_view(), name='editgift'),
+    path('editgift/<int:gift_id>', viewgift.SingleGiftView.as_view(), name='editgift'),
+    path('account/', viewgift.GiftView.as_view(), name='getgift'),
     
     path('contact/', viewcontact.ContactView.as_view(), name='contact'),
     path('contact/<int:contact_id>', viewcontact.ContactView.as_view(), name='editcontact'),

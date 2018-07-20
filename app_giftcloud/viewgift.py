@@ -23,14 +23,11 @@ class GiftView(APIView):
         body_unicode = request.body.decode('utf-8')
         content = json.loads(body_unicode)
         #content = body['content']
-        p = Gift(store_name=content['store_name'], 
-                title=content['title'], 
-                text=content['text'],
+        p = Gift(gift_name=content['gift_name'],
+                link_url=content['link_url'], 
                 price=content['price'],
-                created_date=content['created_date'],
-                published_date=content['published_date'], 
-                gift_choices=content['gift_choices'],
-                share_choices=content['share_choices'])
+                quantity=content['quantity'],
+                gift_details=content['gift_details'])
         #save gift
         p.save()
         #serializer gift
@@ -49,18 +46,19 @@ class SingleGiftView(APIView):
     #edit Gift
     def post(self, request, gift_id):
         body_unicode = request.body.decode('utf-8')
-        c = json.loads(body_unicode)
-        Gift.objects.filter(id=gift_id).update(store_name=c['store_name'], 
-                                                    title=c['title'],
-                                                    text=c['text'],
-                                                    price=c['price'],
-                                                    gift_choices=c['gift_choices'])
+        content = json.loads(body_unicode)
+        Gift.objects.filter(id=gift_id).update(gift_name=content['gift_name'],
+                                                link_url=content['link_url'], 
+                                                price=content['price'],
+                                                quantity=content['quantity'],
+                                                gift_details=content['gift_details'])
         return Response({ "msg": "Gift updated"}, status=200)
     #delete Gift
     def delete(self, request, gift_id):
+     
         try:
-            account = Gift.objects.get(id=gift_id).delete()
+            gift = Gift.objects.get(id=gift_id).delete()
         except Gift.DoesNotExist:
             return Response({"msg":"Gift no faund"}, status=404)
-        serializer = GiftSerializer(account, many=False)
+        serializer = GiftSerializer(gift, many=False)
         return Response(serializer.data)

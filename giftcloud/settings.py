@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,6 +35,7 @@ ALLOWED_HOSTS = [
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'corsheaders',
     'django.contrib.admin',
@@ -43,14 +46,33 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app_giftcloud',
+    'rest_framework.authtoken'
 ]
 
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+
+SESSION_ENGINE="django.contrib.sessions.backends.signed_cookies"
+
+
+
 MIDDLEWARE = [
-      'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -116,6 +138,27 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+SOCIAL_AUTH_GITHUB_KEY = '8091929aed49d94a245d'
+SOCIAL_AUTH_GITHUB_SECRET = 'baf9c77c540e30ec289635e6ad40f79abf7bc241'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+
+SOCIAL_AUTH_FACEBOOK_KEY = ''
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+'locale': 'ru_RU',
+'fields': 'id, name, email, age_range'
+}
+
+SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -129,6 +172,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -136,3 +180,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+name = 'github'
+AUTHORIZATION_URL = 'https://github.com/login/oauth/authorize'
+ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token'
+SCOPE_SEPARATOR = ','
+EXTRA_DATA = [
+('id', 'id'),
+('expires', 'expires')
+]
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'

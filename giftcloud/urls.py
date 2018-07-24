@@ -15,10 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app_giftcloud import viewprofile, viewgift, viewcontact, viewnotification, viewevent, viewsocial
+from app_giftcloud import viewprofile, viewgift, viewcontact, viewnotification, viewevent, viewsocial, viewlogin
+
+from rest_framework import permissions
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
+from rest_framework.authtoken import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', viewlogin.CustomAuthToken.as_view()),
+    # path('', include('social_django.urls', namespace='social')),
+    
+    #path('', include('social_django.urls', name='github')),
+    
+    # path('profile/o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    #path('profile/oauth/authorize?client_id=8091929aed49d94a245d&scope=respo', viewprofile.ProfileView.as_view(), name='profile'),
     path('profile/', viewprofile.ProfileView.as_view(), name='profile'),
     path('editprofile/<int:profile_id>', viewprofile.SingleProfileView.as_view(), name='editprofile'),
     

@@ -4,6 +4,8 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Profile,ProfileSerializer
+from django.contrib.auth.models import User
+
 
 
 import json
@@ -23,21 +25,30 @@ class ProfileView(APIView):
         body_unicode = request.body.decode('utf-8')
         content = json.loads(body_unicode)
         
-        first_name = content.get("first_name", None)
+        first_name = content.get("first_name", "")
         
-        if first_name is None:
-            return Response("first_name needed", status=400)    
+        if first_name == "":
+            return Response("first_name needed and can't be blank", status=400)    
         
-        p = Profile(first_name=content['first_name'], 
+        user = User()
+        user.email = content['email']
+        user.password = content['password']
+        user.username = content['email']
+        user.set_password(content["password"])
+        user.save()
+        
+        profile = Profile(first_name=content['first_name'], 
                     last_name=content['last_name'], 
                     birthdate=content['birthdate'], 
                     email=content['email'], 
-                    password=content['password'])
-        #save contact
-        p.save()
+                    password=content['password'], user_base = user)
+        #save contacts
+        profile.save()
+        
+        
         #serializer contact
-        serializer = ProfileSerializer(p, many=False)
-        #include it on the response
+       
+        serializer = ProfileSerializer(profile, many=False)
         return Response(serializer.data)
     
 class SingleProfileView(APIView):

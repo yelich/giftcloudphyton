@@ -18,23 +18,6 @@ class ContactView(APIView):
         #include it on the response
         return Response(serializer.data)
 
-    def put(self, request):
-        #create Contact
-        body_unicode = request.body.decode('utf-8')
-        content = json.loads(body_unicode)
-        #content = body['content']
-        p = Contact(full_name=content['full_name'], 
-                social=content['social'], 
-                birthdate=content['birthdate'],
-                email=content['email'],
-                phone=content['phone'])
-         #save Contact
-        p.save()
-        #serializer Contact
-        serializer = ContactSerializer(p, many=False)
-        #include it on the response
-        return Response(serializer.data)
-
 class SingleContactView(APIView):
     def get(self, request, contact_id):
         try:
@@ -43,16 +26,6 @@ class SingleContactView(APIView):
             return Response({"msg":"Error"}, status=404)
         serializer = ContactSerializer(contacts, many=False)
         return Response(serializer.data)
-    #edit contact
-    def post(self, request, contact_id):
-        body_unicode = request.body.decode('utf-8')
-        content = json.loads(body_unicode)
-        Contact.objects.filter(id=contact_id).update(full_name=content['full_name'], 
-                                                        social=content['social'], 
-                                                        birthdate=content['birthdate'],
-                                                        email=content['email'],
-                                                        phone=content['phone'])
-        return Response({ "msg": "Contact updated"}, status=200)
     #delete contact
     def delete(self, request, contact_id):
         try:

@@ -142,22 +142,6 @@ AUTH_PASSWORD_VALIDATORS = [
 SOCIAL_AUTH_GITHUB_KEY = '8091929aed49d94a245d'
 SOCIAL_AUTH_GITHUB_SECRET = 'baf9c77c540e30ec289635e6ad40f79abf7bc241'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
-
-SOCIAL_AUTH_FACEBOOK_KEY = ''
-SOCIAL_AUTH_FACEBOOK_SECRET = ''
-
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-
-
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-'locale': 'ru_RU',
-'fields': 'id, name, email, age_range'
-}
-
-SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -191,4 +175,3 @@ EXTRA_DATA = [
 ('expires', 'expires')
 ]
 
-SOCIAL_AUTH_URL_NAMESPACE = 'social'

@@ -69,6 +69,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=13, default=True)
     zip_code = models.CharField(max_length=9, default=True)
     user_base = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    
 
     #gifts = models.ManyToManyField(Gift, through='MyGift') 
     # gifts = models.ManyToManyField(Gift) 
@@ -140,11 +141,10 @@ class Contact(models.Model):
     id = models.AutoField(primary_key=True)
     full_name = models.CharField(max_length=50, default='')
     email = models.CharField(max_length=50, default='', unique=True)
-    phone = models.CharField(max_length=50, default='')
-    
+    profile = models.ForeignKey("app_giftcloud.Profile", blank=True, null=True, on_delete=models.CASCADE)
     
 class ContactSerializer(serializers.ModelSerializer):
         class Meta:
             model = Profile
-            fields = ('id','full_name', 'email','phone')
+            fields = ('id','full_name', 'email')
 

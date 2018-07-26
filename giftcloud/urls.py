@@ -35,11 +35,12 @@ urlpatterns = [
     path('editprofile/<int:profile_id>', viewprofile.SingleProfileView.as_view(), name='editprofile'),
     
     path('gift/', viewgift.GiftView.as_view(), name='gift'),
+    #path('profile/<int:profile_id>/gift/', viewgift.GiftView.as_view(), name='gift'),
     path('editgift/<int:gift_id>', viewgift.SingleGiftView.as_view(), name='editgift'),
     path('account/', viewgift.GiftView.as_view(), name='getgift'),
     
-    path('contact/', viewcontact.ContactView.as_view(), name='contact'),
-    path('contact/<int:contact_id>', viewcontact.ContactView.as_view(), name='editcontact'),
+  
+    path('contact/<int:contact_id>', viewcontact.ContactView.as_view(), name='contact'),
     
     path('notification/', viewnotification.NotificationView.as_view(), name='notification'),
     path('editnotification/<int:notification_id>', viewnotification.NotificationView.as_view(), name='editnotification'),

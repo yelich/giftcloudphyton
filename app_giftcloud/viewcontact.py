@@ -11,21 +11,14 @@ import datetime
 
 class ContactView(APIView):
     def get(self, request):
-        #get Contact
-        all_entries = Contact.objects.all()
-        #serializer Contact
-        serializer = ContactSerializer(all_entries, many=True)
-        #include it on the response
+        try:
+            account = Contact.objects.filter(profile = request.user)
+        except Profile.DoesNotExist:
+            return Response({"msg":"Account no faund"}, status=404)
+        serializer = ProfileSerializer(account, many=False)
         return Response(serializer.data)
 
 class SingleContactView(APIView):
-    def get(self, request, contact_id):
-        try:
-            contacts = Contact.objects.get(id=contact_id)
-        except Contact.DoesNotExist:
-            return Response({"msg":"Error"}, status=404)
-        serializer = ContactSerializer(contacts, many=False)
-        return Response(serializer.data)
     #delete contact
     def delete(self, request, contact_id):
         try:

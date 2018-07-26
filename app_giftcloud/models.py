@@ -139,12 +139,13 @@ class SocialSerializer(serializers.ModelSerializer):
             
 class Contact(models.Model):
     id = models.AutoField(primary_key=True)
-    full_name = models.CharField(max_length=50, default='')
-    email = models.CharField(max_length=50, default='', unique=True)
-    profile = models.ForeignKey("app_giftcloud.Profile", blank=True, null=True, on_delete=models.CASCADE)
+    followee = models.ForeignKey("app_giftcloud.Profile", blank=True, null=True,  related_name='followee_fk' on_delete=models.CASCADE) 
+    profile = models.ForeignKey("app_giftcloud.Profile", blank=True, null=True, related_name='profile_fk' on_delete=models.CASCADE)
+    date_joined = models.DateField()
+    invite_reason = models.CharField(max_length=64)
     
 class ContactSerializer(serializers.ModelSerializer):
         class Meta:
             model = Profile
-            fields = ('id','full_name', 'email')
+            fields = ('id', 'email')
 

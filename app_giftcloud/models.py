@@ -27,6 +27,7 @@ class Gift(models.Model):
         (EMAIL, 'Email'),  
     )
     id = models.AutoField(primary_key=True)
+    img_url = models.CharField(max_length=500, default='')
     gift_name = models.CharField(max_length=50, default='')
     link_url = models.CharField(max_length=500, default='')
     store_name = models.CharField(max_length=50, default='')
@@ -56,7 +57,7 @@ class Gift(models.Model):
 class GiftSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gift
-        fields = ('id','gift_name','link_url','store_name','title','gift_details','quantity','price','created_date','published_date','privacy','share_choices')    
+        fields = ('id','gift_name','link_url','store_name','title','gift_details','quantity','price','created_date','published_date','privacy','share_choices','img_url')    
 
 
 class Profile(models.Model):

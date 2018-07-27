@@ -50,6 +50,8 @@ urlpatterns = [
     
     path('social/', viewsocial.SocialView.as_view(), name='social')
     
+   
+    
     
     
     

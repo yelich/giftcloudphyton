@@ -66,7 +66,6 @@ class SingleProfileView(APIView):
         Profile.objects.filter(id=profile_id).update(first_name=c['first_name'], 
                                                     last_name=c['last_name'],
                                                     birthdate=c['birthdate'],
-                                                    email=c['email'],
                                                     password=c['password'])
         return Response({ "msg": "Profile updated"}, status=200)
     #delete an Profile

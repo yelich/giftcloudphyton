@@ -18,6 +18,10 @@ class GiftView(APIView):
         #include it on the response
         return Response(serializer.data)
     
+    
+    
+    
+    
     def put(self, request):
         #create Gift
         body_unicode = request.body.decode('utf-8')
@@ -55,7 +59,7 @@ class SingleGiftView(APIView):
         body_unicode = request.body.decode('utf-8')
         content = json.loads(body_unicode)
         Gift.objects.filter(id=gift_id).update(gift_name=content['gift_name'],
-                                                link_url=content['link_url'], 
+                                                link_url=content['link_url'],
                                                 price=content['price'],
                                                 quantity=content['quantity'],
                                                 gift_details=content['gift_details'],
